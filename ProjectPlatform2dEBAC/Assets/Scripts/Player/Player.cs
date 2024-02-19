@@ -10,11 +10,14 @@ public class Player : MonoBehaviour
     private Vector2 friction;
 
     public float speed;
+    public float speedRun;
 
     private float movement;
 
     [SerializeField]
     private float jumpForce;
+
+    private float _currentSpeed;
     void Start()
     {
         
@@ -32,14 +35,23 @@ public class Player : MonoBehaviour
         //movement = Input.GetAxis("Horizontal");
         //rb.velocity = new Vector2(speed * movement,rb.velocity.y);
 
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            _currentSpeed = speedRun;
+        }
+        else
+        {
+            _currentSpeed = speed;
+        }
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            rb.velocity = new Vector2(-_currentSpeed, rb.velocity.y);
 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            rb.velocity = new Vector2(_currentSpeed, rb.velocity.y);
         }
 
 
