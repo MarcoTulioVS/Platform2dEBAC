@@ -11,6 +11,9 @@ public class HealthBase : MonoBehaviour
     private bool _isDead;
 
     public bool destroyOnKill;
+
+    [SerializeField]
+    private float delayToKill;
     private void Awake()
     {
         Init();
@@ -42,7 +45,7 @@ public class HealthBase : MonoBehaviour
 
         if (destroyOnKill)
         {
-            Destroy(gameObject);
+            Destroy(gameObject,delayToKill);
         }
     }
 }
