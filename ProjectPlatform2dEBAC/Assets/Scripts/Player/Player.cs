@@ -6,11 +6,15 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    public Vector2 velocity;
+    [SerializeField]
+    private Vector2 friction;
 
     public float speed;
 
     private float movement;
+
+    [SerializeField]
+    private float jumpForce;
     void Start()
     {
         
@@ -18,6 +22,12 @@ public class Player : MonoBehaviour
 
     
     void Update()
+    {
+        Jump();
+        Move();
+    }
+
+    private void Move()
     {
         //movement = Input.GetAxis("Horizontal");
         //rb.velocity = new Vector2(speed * movement,rb.velocity.y);
@@ -31,5 +41,24 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
+
+
+        if(rb.velocity.x > 0)
+        {
+            rb.velocity -= friction;
+        }
+        else if(rb.velocity.x < 0)
+        {
+            rb.velocity += friction;
+        }
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = Vector2.up * jumpForce;
+        }
+        
     }
 }
