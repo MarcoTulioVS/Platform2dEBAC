@@ -23,7 +23,11 @@ public class Player : MonoBehaviour
     public float jumpScaleY;
     public float jumpScaleX;
     public float animationDuration;
-    public Ease ease = Ease.OutBack; 
+    public Ease ease = Ease.OutBack;
+
+    public string boolRun = "Run";
+    public Animator anim;
+    public float playerSwipeDuration = 0.1f;
 
     private float _currentSpeed;
     void Start()
@@ -46,20 +50,40 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             _currentSpeed = speedRun;
+            anim.speed = 1.8f;
         }
         else
         {
             _currentSpeed = speed;
+            anim.speed = 1;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rb.velocity = new Vector2(-_currentSpeed, rb.velocity.y);
+            
+            if(rb.transform.localScale.x != -1)
+            {
+                rb.transform.DOScaleX(-1, playerSwipeDuration);
+            }
+            
+            anim.SetBool(boolRun, true);
 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             rb.velocity = new Vector2(_currentSpeed, rb.velocity.y);
+            
+            if(rb.transform.localScale.x != 1)
+            {
+                rb.transform.DOScaleX(1, playerSwipeDuration);
+            }
+           
+            anim.SetBool(boolRun, true);
+        }
+        else
+        {
+            anim.SetBool(boolRun, false);
         }
 
 
