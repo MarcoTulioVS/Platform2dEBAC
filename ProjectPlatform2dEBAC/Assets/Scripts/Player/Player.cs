@@ -26,22 +26,34 @@ public class Player : MonoBehaviour
     public Ease ease = Ease.OutBack;
 
     public string boolRun = "Run";
+    public string triggerDeath = "Death";
     public Animator anim;
     public float playerSwipeDuration = 0.1f;
 
     private float _currentSpeed;
-    void Start()
+
+    [SerializeField]
+    private HealthBase _healthBase;
+    private void Awake()
     {
-        
+        if (_healthBase != null)
+        {
+            _healthBase.OnKill += OnPlayerKill;
+        }
     }
 
-    
+
     void Update()
     {
         Jump();
         Move();
     }
 
+    private void OnPlayerKill()
+    {
+        _healthBase.OnKill -= OnPlayerKill;
+        anim.SetTrigger(triggerDeath);
+    }
     private void Move()
     {
         //movement = Input.GetAxis("Horizontal");
@@ -113,5 +125,10 @@ public class Player : MonoBehaviour
     {
         rb.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2,LoopType.Yoyo).SetEase(ease);
         rb.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2,LoopType.Yoyo).SetEase(ease);
+    }
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 }
