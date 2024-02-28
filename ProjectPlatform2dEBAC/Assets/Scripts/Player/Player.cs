@@ -56,9 +56,7 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
-        //movement = Input.GetAxis("Horizontal");
-        //rb.velocity = new Vector2(speed * movement,rb.velocity.y);
-
+       
         if (Input.GetKey(KeyCode.LeftControl))
         {
             _currentSpeed = speedRun;
@@ -74,9 +72,11 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(-_currentSpeed, rb.velocity.y);
             
-            if(rb.transform.localScale.x != -1)
+            if(transform.rotation.y >= 0)
             {
-                rb.transform.DOScaleX(-1, playerSwipeDuration);
+                //rb.transform.DOScaleX(-1, playerSwipeDuration);
+                transform.DOLocalRotate(new Vector3(0, 180, 0), playerSwipeDuration);
+
             }
             
             anim.SetBool(boolRun, true);
@@ -86,9 +86,12 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(_currentSpeed, rb.velocity.y);
             
-            if(rb.transform.localScale.x != 1)
+            if(transform.rotation.y <= 180)
             {
-                rb.transform.DOScaleX(1, playerSwipeDuration);
+                //rb.transform.DOScaleX(1, playerSwipeDuration);
+                transform.DOLocalRotate(Vector3.zero, playerSwipeDuration);
+                
+
             }
            
             anim.SetBool(boolRun, true);
