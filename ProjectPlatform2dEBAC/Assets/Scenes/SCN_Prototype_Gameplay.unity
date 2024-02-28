@@ -1299,7 +1299,9 @@ MonoBehaviour:
   damage: 10
   anim: {fileID: 1566668215}
   triggerAttack: attack
+  triggerDeath: death
   healthBase: {fileID: 589104800}
+  timeToDestroy: 1
 --- !u!4 &589104798
 Transform:
   m_ObjectHideFlags: 0
@@ -1349,7 +1351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 10
-  destroyOnKill: 1
+  destroyOnKill: 0
   delayToKill: 0
   _flashColor: {fileID: 589104801}
 --- !u!114 &589104801
@@ -5311,8 +5313,10 @@ MonoBehaviour:
   animationDuration: 0.3
   ease: 27
   boolRun: Run
+  triggerDeath: Death
   anim: {fileID: 117470126}
   playerSwipeDuration: 0.1
+  _healthBase: {fileID: 1976187562}
 --- !u!114 &1976187562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6035,7 +6039,9 @@ MonoBehaviour:
   damage: 10
   anim: {fileID: 0}
   triggerAttack: Attack
+  triggerDeath: death
   healthBase: {fileID: 0}
+  timeToDestroy: 0
 --- !u!1 &2145305069
 GameObject:
   m_ObjectHideFlags: 0
