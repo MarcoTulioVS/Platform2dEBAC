@@ -6,37 +6,13 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    [Header("Speed setup")]
-    [SerializeField]
-    private Vector2 friction;
-
-    public float speed;
-    public float speedRun;
-
-    [SerializeField]
-    private float jumpForce;
-
     //private float movement;
 
-    [Header("Animation setup")]
+    [Header("Setup")]
 
-    /*public float jumpScaleY;//
-    public float jumpScaleX;//
-    public float animationDuration;//*/
-
-    public SOFloat soJumpScaleY;
-    public SOFloat soJumpScaleX;
-    public SOFloat soAnimationDuration;
-
-
-
-    public Ease ease = Ease.OutBack;
-
-    public string boolRun = "Run";
-    public string triggerDeath = "Death";
+    public SOPlayerSetup soPlayerSetup;
     public Animator anim;
-    public float playerSwipeDuration = 0.1f;
-
+    
     private float _currentSpeed;
 
     [SerializeField]
@@ -59,19 +35,19 @@ public class Player : MonoBehaviour
     private void OnPlayerKill()
     {
         _healthBase.OnKill -= OnPlayerKill;
-        anim.SetTrigger(triggerDeath);
+        anim.SetTrigger(soPlayerSetup.triggerDeath);
     }
     private void Move()
     {
        
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            _currentSpeed = speedRun;
+            _currentSpeed = soPlayerSetup.speedRun;
             anim.speed = 1.8f;
         }
         else
         {
-            _currentSpeed = speed;
+            _currentSpeed = soPlayerSetup.speed;
             anim.speed = 1;
         }
 
@@ -82,11 +58,11 @@ public class Player : MonoBehaviour
             if(transform.rotation.y >= 0)
             {
                 //rb.transform.DOScaleX(-1, playerSwipeDuration);
-                transform.DOLocalRotate(new Vector3(0, 180, 0), playerSwipeDuration);
+                transform.DOLocalRotate(new Vector3(0, 180, 0), soPlayerSetup.playerSwipeDuration);
 
             }
             
-            anim.SetBool(boolRun, true);
+            anim.SetBool(soPlayerSetup.boolRun, true);
 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
@@ -96,24 +72,24 @@ public class Player : MonoBehaviour
             if(transform.rotation.y <= 180)
             {
                 //rb.transform.DOScaleX(1, playerSwipeDuration);
-                transform.DOLocalRotate(Vector3.zero, playerSwipeDuration);
+                transform.DOLocalRotate(Vector3.zero, soPlayerSetup.playerSwipeDuration);
             }
            
-            anim.SetBool(boolRun, true);
+            anim.SetBool(soPlayerSetup.boolRun, true);
         }
         else
         {
-            anim.SetBool(boolRun, false);
+            anim.SetBool(soPlayerSetup.boolRun, false);
         }
 
 
         if(rb.velocity.x > 0)
         {
-            rb.velocity -= friction;
+            rb.velocity -= soPlayerSetup.friction;
         }
         else if(rb.velocity.x < 0)
         {
-            rb.velocity += friction;
+            rb.velocity += soPlayerSetup.friction;
         }
     }
 
@@ -121,7 +97,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = Vector2.up * soPlayerSetup.jumpForce;
             rb.transform.localScale = Vector2.one;
 
             DOTween.Kill(rb.transform);
@@ -131,8 +107,8 @@ public class Player : MonoBehaviour
 
     private void ScaleJump()
     {
-        rb.transform.DOScaleY(soJumpScaleY.value, soAnimationDuration.value).SetLoops(2,LoopType.Yoyo).SetEase(ease);
-        rb.transform.DOScaleX(soJumpScaleX.value, soAnimationDuration.value).SetLoops(2,LoopType.Yoyo).SetEase(ease);
+        rb.transform.DOScaleY(soPlayerSetup.jumpScaleY, soPlayerSetup.animationDuration).SetLoops(2,LoopType.Yoyo).SetEase(soPlayerSetup.ease);
+        rb.transform.DOScaleX(soPlayerSetup.jumpScaleX, soPlayerSetup.animationDuration).SetLoops(2,LoopType.Yoyo).SetEase(soPlayerSetup.ease);
     }
 
     public void DestroyMe()
