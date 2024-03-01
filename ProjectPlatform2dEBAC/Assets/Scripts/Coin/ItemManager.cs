@@ -7,7 +7,7 @@ public class ItemManager : Singleton<ItemManager>
 {
   
     public SOInt coins;
-
+    public SOInt planets;
     private void Start()
     {
         Reset();
@@ -15,17 +15,30 @@ public class ItemManager : Singleton<ItemManager>
     public void AddCoins(int amount = 1)
     {
         coins.value += amount;
-        UpdateUI();
+        //UpdateUI();
+    }
+
+    public void AddPlanet(int amount = 1)
+    {
+        planets.value += amount;
+        //UpdateUIPlanet();
     }
 
     private void Reset()
     {
         coins.value = 0;
+        planets.value = 0;
     }
 
     private void UpdateUI()
     {
-        //uiTextCoins.text = coins.ToString();
-        UIInGameManager.instance.UpdateTextCoins(coins.value.ToString());
+        UIInGameManager.instance.uiTextCoins.text = coins.value.ToString();
+        
+        
+    }
+    private void UpdateUIPlanet()
+    {
+
+        UIInGameManager.instance.uiTextPlanets.text = planets.value.ToString();
     }
 }

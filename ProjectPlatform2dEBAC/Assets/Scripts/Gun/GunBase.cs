@@ -14,6 +14,11 @@ public class GunBase : MonoBehaviour
 
     public Transform playerSideReference;
 
+
+    private void Awake()
+    {
+        playerSideReference = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))

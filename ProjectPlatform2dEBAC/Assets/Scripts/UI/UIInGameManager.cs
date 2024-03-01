@@ -6,9 +6,17 @@ using TMPro;
 public class UIInGameManager : Singleton<UIInGameManager>
 {
     public TextMeshProUGUI uiTextCoins;
+    public TextMeshProUGUI uiTextPlanets;
+    //public void UpdateTextCoins(TextMeshProUGUI text,int soInt)
+    //{
+      
+    //    text.text = soInt.ToString();
+        
+    //}
 
-    public void UpdateTextCoins(string s)
+    public void UpdateCoins(string s)
     {
         uiTextCoins.text = s;
     }
+
 }
