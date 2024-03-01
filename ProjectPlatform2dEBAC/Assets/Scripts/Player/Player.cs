@@ -20,9 +20,16 @@ public class Player : MonoBehaviour
 
     [Header("Animation setup")]
 
-    public float jumpScaleY;
-    public float jumpScaleX;
-    public float animationDuration;
+    /*public float jumpScaleY;//
+    public float jumpScaleX;//
+    public float animationDuration;//*/
+
+    public SOFloat soJumpScaleY;
+    public SOFloat soJumpScaleX;
+    public SOFloat soAnimationDuration;
+
+
+
     public Ease ease = Ease.OutBack;
 
     public string boolRun = "Run";
@@ -124,8 +131,8 @@ public class Player : MonoBehaviour
 
     private void ScaleJump()
     {
-        rb.transform.DOScaleY(jumpScaleY, animationDuration).SetLoops(2,LoopType.Yoyo).SetEase(ease);
-        rb.transform.DOScaleX(jumpScaleX, animationDuration).SetLoops(2,LoopType.Yoyo).SetEase(ease);
+        rb.transform.DOScaleY(soJumpScaleY.value, soAnimationDuration.value).SetLoops(2,LoopType.Yoyo).SetEase(ease);
+        rb.transform.DOScaleX(soJumpScaleX.value, soAnimationDuration.value).SetLoops(2,LoopType.Yoyo).SetEase(ease);
     }
 
     public void DestroyMe()
