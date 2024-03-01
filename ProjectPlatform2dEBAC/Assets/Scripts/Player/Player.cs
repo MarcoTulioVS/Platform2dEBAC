@@ -90,8 +90,6 @@ public class Player : MonoBehaviour
             {
                 //rb.transform.DOScaleX(1, playerSwipeDuration);
                 transform.DOLocalRotate(Vector3.zero, playerSwipeDuration);
-                
-
             }
            
             anim.SetBool(boolRun, true);
