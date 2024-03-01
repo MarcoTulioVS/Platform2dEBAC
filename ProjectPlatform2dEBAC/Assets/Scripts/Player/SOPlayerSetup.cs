@@ -6,6 +6,9 @@ using DG.Tweening;
 [CreateAssetMenu]
 public class SOPlayerSetup : ScriptableObject
 {
+    public Animator player;
+    public SOString soStringName;
+
     [Header("Speed setup")]
     public Vector2 friction = new Vector2(0.3f,0);
 

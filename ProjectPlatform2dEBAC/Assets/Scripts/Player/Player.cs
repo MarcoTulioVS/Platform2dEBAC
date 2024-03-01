@@ -11,7 +11,9 @@ public class Player : MonoBehaviour
     [Header("Setup")]
 
     public SOPlayerSetup soPlayerSetup;
-    public Animator anim;
+    //public Animator anim;
+
+    private Animator _currentPlayer;
     
     private float _currentSpeed;
 
@@ -23,6 +25,8 @@ public class Player : MonoBehaviour
         {
             _healthBase.OnKill += OnPlayerKill;
         }
+
+        _currentPlayer = Instantiate(soPlayerSetup.player,transform);
     }
 
 
@@ -35,7 +39,7 @@ public class Player : MonoBehaviour
     private void OnPlayerKill()
     {
         _healthBase.OnKill -= OnPlayerKill;
-        anim.SetTrigger(soPlayerSetup.triggerDeath);
+        _currentPlayer.SetTrigger(soPlayerSetup.triggerDeath);
     }
     private void Move()
     {
@@ -43,12 +47,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             _currentSpeed = soPlayerSetup.speedRun;
-            anim.speed = 1.8f;
+            _currentPlayer.speed = 1.8f;
         }
         else
         {
             _currentSpeed = soPlayerSetup.speed;
-            anim.speed = 1;
+            _currentPlayer.speed = 1;
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -61,8 +65,8 @@ public class Player : MonoBehaviour
                 transform.DOLocalRotate(new Vector3(0, 180, 0), soPlayerSetup.playerSwipeDuration);
 
             }
-            
-            anim.SetBool(soPlayerSetup.boolRun, true);
+
+            _currentPlayer.SetBool(soPlayerSetup.boolRun, true);
 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
@@ -74,12 +78,12 @@ public class Player : MonoBehaviour
                 //rb.transform.DOScaleX(1, playerSwipeDuration);
                 transform.DOLocalRotate(Vector3.zero, soPlayerSetup.playerSwipeDuration);
             }
-           
-            anim.SetBool(soPlayerSetup.boolRun, true);
+
+            _currentPlayer.SetBool(soPlayerSetup.boolRun, true);
         }
         else
         {
-            anim.SetBool(soPlayerSetup.boolRun, false);
+            _currentPlayer.SetBool(soPlayerSetup.boolRun, false);
         }
 
 

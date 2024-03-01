@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337b8f7dac9944b4fa3bef2cee8bcfdc, type: 3}
   m_Name: SO_Player_01
   m_EditorClassIdentifier: 
-  speed: 0
-  speedRun: 0
-  jumpForce: 0
-  jumpScaleY: 0
-  jumpScaleX: 0
-  animationDuration: 0
+  player: {fileID: 6413013834153556191, guid: 00afc9fb4087652419d090da0b825d97, type: 3}
+  friction: {x: 0.3, y: 0}
+  speed: 12
+  speedRun: 20
+  jumpForce: 20
+  jumpScaleY: 1.2
+  jumpScaleX: 0.8
+  animationDuration: 0.3
   ease: 27
   boolRun: Run
   triggerDeath: Death
