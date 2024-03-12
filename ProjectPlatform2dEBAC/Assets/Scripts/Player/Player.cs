@@ -20,11 +20,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private HealthBase _healthBase;
 
+    public int direction = 1;
+
     [Header("Jump Collision Check")]
     public Collider2D collider2D;
     private float distToGround;
     public float spaceToGround = 0.1f;
     public ParticleSystem jumpVFX;
+
+    
     private void Awake()
     {
         if (_healthBase != null)
@@ -80,7 +84,7 @@ public class Player : MonoBehaviour
             {
                 //rb.transform.DOScaleX(-1, playerSwipeDuration);
                 transform.DOLocalRotate(new Vector3(0, 180, 0), soPlayerSetup.playerSwipeDuration);
-
+                direction = -1;
             }
 
             _currentPlayer.SetBool(soPlayerSetup.boolRun, true);
@@ -94,6 +98,7 @@ public class Player : MonoBehaviour
             {
                 //rb.transform.DOScaleX(1, playerSwipeDuration);
                 transform.DOLocalRotate(Vector3.zero, soPlayerSetup.playerSwipeDuration);
+                direction = 1;
             }
 
             _currentPlayer.SetBool(soPlayerSetup.boolRun, true);

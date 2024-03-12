@@ -12,12 +12,12 @@ public class GunBase : MonoBehaviour
 
     private Coroutine _currentCoroutine;
 
-    public Transform playerSideReference;
+    public Player playerSideReference;
 
 
     private void Awake()
     {
-        playerSideReference = GameObject.FindGameObjectWithTag("Player").transform;
+        playerSideReference = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     private void Update()
     {
@@ -38,7 +38,9 @@ public class GunBase : MonoBehaviour
     {
         var projectile = Instantiate(prefabProjectile);
         projectile.transform.position = positionToShoot.position;
-        projectile.side = playerSideReference.transform.localScale.x;
+        //projectile.side = playerSideReference.transform.localScale.x;
+        projectile.side = playerSideReference.direction;
+        VFXManager.instance.PlayVFXByType(VFXManager.VFXType.SHOOT,positionToShoot.position);
     }
 
     IEnumerator StartShoot()
