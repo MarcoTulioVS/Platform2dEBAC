@@ -11,6 +11,9 @@ public class ItemCollectableBase : MonoBehaviour
 
     public GameObject graphicItem;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == compareTag)
@@ -38,6 +41,11 @@ public class ItemCollectableBase : MonoBehaviour
         if(particleSystem != null)
         {
             particleSystem.Play();
+
+            if(audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
     }
    
