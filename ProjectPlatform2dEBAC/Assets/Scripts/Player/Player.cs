@@ -28,9 +28,15 @@ public class Player : MonoBehaviour
     public float spaceToGround = 0.1f;
     public ParticleSystem jumpVFX;
 
-    
+
+    private void Start()
+    {
+        direction = 1;
+        
+    }
     private void Awake()
     {
+        
         if (_healthBase != null)
         {
             _healthBase.OnKill += OnPlayerKill;
