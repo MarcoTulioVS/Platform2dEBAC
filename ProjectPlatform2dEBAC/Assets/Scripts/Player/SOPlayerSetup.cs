@@ -27,5 +27,6 @@ public class SOPlayerSetup : ScriptableObject
 
     public string boolRun = "Run";
     public string triggerDeath = "Death";
+    public string boolJump = "Jump";
     public float playerSwipeDuration = 0.1f;
 }

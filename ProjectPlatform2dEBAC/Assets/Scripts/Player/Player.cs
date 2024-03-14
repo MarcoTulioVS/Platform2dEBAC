@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
     public float spaceToGround = 0.1f;
     public ParticleSystem jumpVFX;
 
-
     private void Start()
     {
         direction = 1;
@@ -131,10 +130,15 @@ public class Player : MonoBehaviour
         {
             rb.velocity = Vector2.up * soPlayerSetup.jumpForce;
             rb.transform.localScale = Vector2.one;
-
+            _currentPlayer.SetBool(soPlayerSetup.boolJump, true);
             DOTween.Kill(rb.transform);
             ScaleJump();
             PlayJumpVFX();
+
+        }
+        else
+        {
+            _currentPlayer.SetBool(soPlayerSetup.boolJump, false);
         }
     }
 
@@ -146,6 +150,8 @@ public class Player : MonoBehaviour
         //    jumpVFX.Play();
         //}
     }
+
+   
 
     private void ScaleJump()
     {
