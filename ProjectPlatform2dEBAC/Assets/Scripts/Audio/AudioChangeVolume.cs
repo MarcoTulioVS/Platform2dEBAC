@@ -6,7 +6,7 @@ public class AudioChangeVolume : MonoBehaviour
 {
     public AudioMixer group;
 
-    public string floatParam = "MyExposedParam";
+    public string floatParam;
 
     public void ChangeValue(float f)
     {
